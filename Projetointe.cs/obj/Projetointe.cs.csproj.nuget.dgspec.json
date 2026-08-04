@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alunos\\Desktop\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj": {}
+    "C:\\STM32_2026\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alunos\\Desktop\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj": {
+    "C:\\STM32_2026\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alunos\\Desktop\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj",
+        "projectUniqueName": "C:\\STM32_2026\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj",
         "projectName": "Projetointe.cs",
-        "projectPath": "C:\\Users\\Alunos\\Desktop\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj",
+        "projectPath": "C:\\STM32_2026\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj",
         "packagesPath": "C:\\Users\\Alunos\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alunos\\Desktop\\Projeto_integrado2\\Projetointe.cs\\obj\\",
+        "outputPath": "C:\\STM32_2026\\Projeto_integrado2\\Projetointe.cs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Alunos\\AppData\\Roaming\\NuGet\\NuGet.Config",
