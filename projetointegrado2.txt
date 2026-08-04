@@ -1,0 +1,15 @@
+1) Fazer o STM32 ler um sensor analogico, enviando periodicamente as suas medidas para um pc atraves do usb. ideia de como fazer:
+simular, por exemplo, o volume de um som, ter como medidas, baixo, médio e alto.
+2) desenvolver um programa em C#
+3) desenvolver um servidor
+4) Esse servidor precisa disponibilizar uma api rest que receba leituras enviadas pela aplicacao C#, encaminhar informacoes para a IA, retornar ao cliente resultado
+da classificacao, colocar os dados necessarios para visualizar no front end, sendo essa comunicacao HTTP e JSON.
+5) precisamos estabelecer a comunicacao entre a programacao do C# que vamos fazer com a porta COM do usb, fazer ele receber as leituras do stm32 continuamente de forma
+organizada e tratada. 
+6) Depois disso, temos que transformar isso em formato .JSON.
+7) realizar requisicoes HTTP para o servidor que vamos desenvolver.
+8) usar o modelo machine learning para classificar cada leitura feita.
+9) deverá possuir, no mínimo tres categorias > ruim, medio, bom, ou qualquer outra classificacao que seja coerente com a nossa proposta.
+10) O sistema deverá disponibilizar uma pagina web contendo valor atual da leitura, classificacao retornada pela IA, histórico das ultimas leituras recebidas, indica
+cao visual do estado atual do sistema.
+11) interface sendo atualizado conforme novas medicoes forem sendo realizadas.
