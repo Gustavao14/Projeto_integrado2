@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>IA</title>
+    <title>Main Modulation</title>
 
     <style>
         body {
@@ -15,27 +15,34 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 30px;
 
             background-color: #050b1a;
             font-family: Arial, sans-serif;
         }
 
-        .caixa {
-            background-color: rgba(0, 0, 0, 0.4);
+        .VolumeRadio, .class {
+            background-color: rgba(15, 23, 42, 0.85);
             padding: 40px;
             border-radius: 15px;
             text-align: center;
-            color: white;
-            box-shadow: 0 0 20px white;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 25px rgba(0, 102, 255, 0.25);
+            max-width: 400px;
         }
 
         h1 {
-            font-size: 40px;
-            text-shadow: 0 0 10px white;
+            font-size: 32px;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+            margin-top: 0;
         }
 
         p {
-            font-size: 20px;
+            font-size: 18px;
+            color: #e2e8f0;
+            line-height: 1.5;
         }
 
         .botao-ia {
@@ -44,10 +51,10 @@
             padding: 15px 30px;
 
             background-color: #0066ff;
-            color: white;
+            color: #ffffff;
 
             text-decoration: none;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
 
             border-radius: 10px;
@@ -66,17 +73,25 @@
 </head>
 
 <body>
+ 
+    <div class="VolumeRadio">
+        <h1>insira a musica e controle seu volume</h1>
 
-    <div class="caixa">
+        <p>O sistema está funcionando normalmente.</p>
 
-        <h1>A AI está Rodando</h1>
+        <a href="/IA" class="botao-ia">
+            entrar na Sound Station
+        </a>
+    </div>
+
+    <div class="class">
+        <h1>a IA está Rodando</h1>
 
         <p>O sistema está funcionando normalmente.</p>
 
         <a href="/IA" class="botao-ia">
             Entrar na IA
         </a>
-
     </div>
 
 </body>

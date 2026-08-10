@@ -6,11 +6,11 @@ const app = express();
 app.use(express.static(path.join(process.cwd(),'public')));
 
 app.get('/', (req, res) => {
-res.sendFile(process.cwd(),'servidor_Main','html','Home.html');
+res.sendFile(process.cwd(),'servidor_Main','public','Home.html');
 });
 
 app.get('/IA', (req,res) =>{
-res.sendFile(process.cwd(),'servidor_Main','html','IA.html');
+res.sendFile(process.cwd(),'servidor_Main','public','IA.html');
 });
 
 app.use((req,res) => {
