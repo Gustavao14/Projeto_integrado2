@@ -1,23 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LGZU2mLMs9I=",
+  "dgSpecHash": "sN+nAu6/2g0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Marcos\\Desktop\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.18\\microsoft.netcore.app.ref.9.0.18.nupkg.sha512",
-    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.18\\microsoft.windowsdesktop.app.ref.9.0.18.nupkg.sha512",
-    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.18\\microsoft.aspnetcore.app.ref.9.0.18.nupkg.sha512",
-    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\9.0.18\\microsoft.netcore.app.host.win-x64.9.0.18.nupkg.sha512"
-  ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
-      "projectPath": "C:\\Users\\Marcos\\Desktop\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\Marcos\\Desktop\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "projectFilePath": "C:\\Users\\Alunos\\Desktop\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj",
+  "expectedPackageFiles": [],
+  "logs": []
 }
