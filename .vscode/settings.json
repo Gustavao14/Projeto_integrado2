@@ -1,3 +1,4 @@
 {
-    "dotnet.defaultSolution": "Projetointe.sln"
+    "dotnet.defaultSolution": "Projetointe.sln",
+    "python-envs.defaultEnvManager": "ms-python.python:system"
 }

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trecksound - Processar Dataset</title>
+    <style>
+        body {
+            background-color: #050b1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .card-form {
+            background-color: #0b1224;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #1a305d;
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.2);
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .campo {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #1a305d;
+            background-color: #050b1a;
+            color: white;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #0066ff;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0066ff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 102, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0052cc;
+            box-shadow: 0 0 25px rgba(0, 102, 255, 0.8);
+        }
+
+        #status {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-form">
+        <h2>Enviar Dataset para IA</h2>
+        
+        <form id="datasetForm">
+            <div class="campo">
+                <label for="csvPath">Caminho do CSV (tracks.csv):</label>
+                <input type="text" id="csvPath" name="csvPath" placeholder="Ex: ./tracks.csv" required>
+            </div>
+
+            <div class="campo">
+                <label for="audioFolder">Pasta dos Áudios:</label>
+                <input type="text" id="audioFolder" name="audioFolder" placeholder="Ex: ./fma_small" required>
+            </div>
+
+            <div class="campo">
+                <label for="generos">Gêneros (separados por vírgula):</label>
+                <input type="text" id="generos" name="generos" placeholder="Ex: Rock, Pop, Hip-Hop" required>
+            </div>
+
+            <button type="submit">Enviar para Processamento</button>
+        </form>
+
+        <div id="status"></div>
+    </div>
+
+    <script>
+        document.getElementById('datasetForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const statusDiv = document.getElementById('status');
+            statusDiv.style.color = '#0066ff';
+            statusDiv.textContent = 'Processando e enviando dados...';
+
+            // Coleta os dados do formulário
+            const csvPath = document.getElementById('csvPath').value;
+            const audioFolder = document.getElementById('audioFolder').value;
+            const generosInput = document.getElementById('generos').value;
+
+            // Transforma a string de gêneros em um Array (ex: "Rock, Pop" -> ["Rock", "Pop"])
+            const generos = generosInput.split(',').map(g => g.trim());
+
+            const payload = {
+                csvPath: csvPath,
+                audioFolder: audioFolder,
+                generos: generos
+            };
+
+            try {
+                // Envia a requisição POST para a rota do servidor
+                const response = await fetch('/processar-dataset', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const resultado = await response.json();
+
+                if (response.ok) {
+                    statusDiv.style.color = '#00ff88';
+                    statusDiv.textContent = 'Sucesso! Dataset enviado para a IA.';
+                } else {
+                    statusDiv.style.color = '#ff4d4d';
+                    statusDiv.textContent = 'Erro: ' + (resultado.erro || 'Falha ao processar.');
+                }
+            } catch (error) {
+                statusDiv.style.color = '#ff4d4d';
+                statusDiv.textContent = 'Erro de conexão com o servidor.';
+                console.error(error);
+            }
+        });
+    </script>
+
+</body>
+</html>

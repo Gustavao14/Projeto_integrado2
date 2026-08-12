@@ -1,6 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import { parse } from 'csv-parse';
+import { error } from 'console';
+
+const {enviarDatasetPorGenero} = require('./enviarDatasetPorGenero');
+app.use(express.json());
 const COL_TRACK_ID = 0;
 const COL_GENRE_TOP = 40;
 
@@ -9,6 +13,17 @@ const path = require('path');
 
 const app = express();
 const port = 3000;
+app.post('/Processa_dataset', async(req, res) => {
+
+const {csvPath, audioFolder, generos } = req.body;
+const TreckSoundURL = 'http://localhost:.3000/treinar';
+try{
+  const resultado = await enviarDatasetPorGenero(csvPath, audioFolder, generos);
+  res.json({ mensagem: "Os dados foram enviados", resultado});
+}catch{
+  res.status(500).json({ erro: error.message});
+}
+});
 
 app.use(express.static(path.join(__dirname,'public')));
 
