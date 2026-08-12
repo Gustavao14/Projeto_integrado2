@@ -5,40 +5,48 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 
+
 app = Flask(__name__)
-PASTA_AUDIOS = "./dataset_ia"
+PASTA_AUDIOS = "./DATASET_IA"
 
+async def trecksound():
 
-@app.route("/treinar", methods=["POST"])
-def receber_e_treinar():
-    if "audio" not in request.files or "genero" not in request.form:
-        return jsonify({"erro": "Dados ausentes"}), 400
+    @app.route("/treinar", methods=["POST"])
+    def receber_e_treinar():
 
-    audio = request.files["audio"]
-    genero = request.form["genero"]
+        if "audio" not in request.files or "genero" not in request.form:
+            return jsonify({"erro": "Dados ausentes"}), 400
 
-    # Salva o arquivo enviado pelo Node.js
-    pasta_genero = os.path.join(PASTA_AUDIOS, genero)
-    os.makedirs(pasta_genero, exist_ok=True)
-    audio.save(os.path.join(pasta_genero, audio.filename))
+        audio = request.files["audio"]
+        genero = request.form["genero"]
 
-    return jsonify({"status": "Áudio recebido com sucesso!"}), 200
+        # Salva o arquivo enviado pelo Node.js
+        pasta_genero = os.path.join(PASTA_AUDIOS, genero)
+        os.makedirs(pasta_genero, exist_ok=True)
 
+        audio.save(os.path.join(pasta_genero, audio.filename))
 
-if __name__ == "__main__":
+        return jsonify({"status": "Áudio recebido com sucesso!"}), 200
 
-iris = load_iris()
-X = iris.data
-y = iris.target
+    iris = load_iris()
 
-X_treino, X_teste, y_treino, y_teste = train_test_split(X, y, teste_size = 0.2)
+    X = iris.data
+    y = iris.target
 
-modelo = DecisionTreeClassifier()
-modelo.fit(X_treino, y_treino)
+    X_treino, X_teste, y_treino, y_teste = train_test_split(
+        X,
+        y,
+        test_size=0.2
+    )
 
-predicoes = modelo. predict(X_teste)
+    modelo = DecisionTreeClassifier()
 
-acuracia = accuracy_score(y_teste, predicoes)
-print(f"Prova da IA:{acuracia * 100:.2f}% ")
+    modelo.fit(X_treino, y_treino)
 
-app.run(port=3000)
+    predicoes = modelo.predict(X_teste)
+
+    acuracia = accuracy_score(y_teste, predicoes)
+
+    print(f"Prova da IA: {acuracia * 100:.2f}%")
+
+    app.run(port=3000)
