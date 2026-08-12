@@ -6,92 +6,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Main Modulation</title>
-
+    <link rel="icon" type="image/jpeg" href="/logo.jpeg">
     <style>
         body {
             margin: 0;
             min-height: 100vh;
-
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
-
             background-color: #050b1a;
             font-family: Arial, sans-serif;
         }
 
-        .VolumeRadio, .class {
-            background-color: rgba(15, 23, 42, 0.85);
-            padding: 40px;
-            border-radius: 15px;
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        /* DIV DE CIMA (Agora transparente / na cor de fundo) */
+        .topo {
+            width: 850px;
+            padding: 20px 30px;
+            background-color: transparent;
             text-align: center;
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 25px rgba(0, 102, 255, 0.25);
-            max-width: 400px;
+            color: white;
+            box-sizing: border-box;
         }
 
-        h1 {
-            font-size: 32px;
-            color: #ffffff;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        .topo h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .topo p {
+            margin: 0;
+            color: #a0aec0;
+            font-size: 1.1rem;
+        }
+
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        /* Estilo dos Cards (Sound Station e Trecksound) */
+        .card {
+            background-color: #0b1224;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            border: 1px solid #1a305d;
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.15);
+            width: 350px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card h1 {
+            font-size: 2rem;
             margin-top: 0;
-        }
-
-        p {
-            font-size: 18px;
-            color: #e2e8f0;
-            line-height: 1.5;
-        }
-
-        .botao-ia {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px 30px;
-
-            background-color: #0066ff;
-            color: #ffffff;
-
-            text-decoration: none;
-            font-size: 18px;
+            margin-bottom: 15px;
             font-weight: bold;
-
-            border-radius: 10px;
-
-            box-shadow: 0 0 15px #0066ff;
-
-            transition: 0.3s;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
-        .botao-ia:hover {
-            box-shadow: 0 0 30px #0066ff;
-            transform: scale(1.05);
+        .card p {
+            color: #a0aec0;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        /* Estilo dos Botões dentro dos Cards */
+        .botao-acao {
+            display: inline-block;
+            background-color: #0066ff;
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 0 15px rgba(0, 102, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .botao-acao:hover {
+            background-color: #0052cc;
+            box-shadow: 0 0 25px rgba(0, 102, 255, 0.9);
+            transform: translateY(-2px);
         }
     </style>
-
 </head>
 
 <body>
- 
-    <div class="VolumeRadio">
-        <h1>insira a musica e controle seu volume</h1>
 
-        <p>O sistema está funcionando normalmente.</p>
+    <div class="container">
 
-        <a href="/IA" class="botao-ia">
-            entrar na Sound Station
-        </a>
-    </div>
+        <!-- DIV DE CIMA (TRANSPARENTE) -->
+        <div class="topo">
+            <h1>Main Modulation</h1>
+        </div>
 
-    <div class="class">
-        <h1>a IA está Rodando</h1>
+        <div class="botoes">
 
-        <p>O sistema está funcionando normalmente.</p>
+            <!-- SOUND STATION -->
+            <div class="card">
+                <h1>Sound Station</h1>
+                <p>Seja o autônomo de suas próprias músicas e controle seu volume.</p>
+                <a href="/sound-station" class="botao-acao">
+                    Entrar no Sound Station
+                </a>
+            </div>
 
-        <a href="/IA" class="botao-ia">
-            Entrar na IA
-        </a>
+            <!-- TRECKSOUND -->
+            <div class="card">
+                <h1>trecksound</h1>
+                <p>A IA que te dá sugestões das melhores bandas em tempo real.</p>
+                <a href="/IA" class="botao-acao">
+                    Entrar no trecksound
+                </a>
+            </div>
+
+        </div>
+
     </div>
 
 </body>

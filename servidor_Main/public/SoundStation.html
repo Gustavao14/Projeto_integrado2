@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sound Station</title>
+
+    <link rel="icon" type="image/jpeg" href="/logo.jpeg">
+
+    <style>
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #050b1a;
+
+            font-family: Arial, sans-serif;
+
+            color: white;
+        }
+
+        .SoundStation {
+
+            background-color: rgba(15, 23, 42, 0.85);
+
+            padding: 40px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            box-shadow:
+                0 0 25px rgba(0, 102, 255, 0.25);
+
+            width: 500px;
+
+            max-width: 85%;
+        }
+
+        h1 {
+
+            font-size: 36px;
+
+            color: white;
+
+            text-shadow:
+                0 0 8px rgba(255, 255, 255, 0.6);
+
+            margin-top: 0;
+        }
+
+        p {
+
+            font-size: 18px;
+
+            color: #e2e8f0;
+
+            line-height: 1.5;
+        }
+
+        .arquivo {
+
+            margin-top: 30px;
+        }
+
+        input[type="file"] {
+
+            display: none;
+        }
+
+        .botao {
+
+            display: inline-block;
+
+            padding: 15px 30px;
+
+            background-color: #0066ff;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            box-shadow: 0 0 15px #0066ff;
+
+            transition: 0.3s;
+        }
+
+        .botao:hover {
+
+            box-shadow: 0 0 30px #0066ff;
+
+            transform: scale(1.05);
+        }
+
+        #nomeMusica {
+
+            margin-top: 20px;
+
+            color: #60a5fa;
+
+            font-size: 16px;
+        }
+
+        audio {
+
+            width: 100%;
+
+            margin-top: 20px;
+
+            display: none;
+        }
+
+        video {
+
+            width: 100%;
+
+            margin-top: 20px;
+
+            display: none;
+
+            border-radius: 10px;
+        }
+
+        .voltar {
+
+            display: inline-block;
+
+            margin-top: 25px;
+
+            color: #60a5fa;
+
+            text-decoration: none;
+        }
+
+        .voltar:hover {
+
+            color: white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="SoundStation">
+
+        <h1>🎵 Sound Station</h1>
+
+        <p>
+            Insira uma música para reproduzir.
+        </p>
+
+        <div class="arquivo">
+
+            <label for="musica" class="botao">
+                Escolher música
+            </label>
+
+            <input
+                type="file"
+                id="musica"
+                accept=".mp3,.mp4,audio/mpeg,video/mp4"
+            >
+
+        </div>
+
+        <div id="nomeMusica">
+            Nenhuma música selecionada
+        </div>
+
+        <audio id="audio" controls></audio>
+
+        <video id="video" controls></video>
+
+        <a href="/" class="voltar">
+            ← Voltar para Home
+        </a>
+
+    </div>
+
+
+    <script>
+
+        const musica = document.getElementById("musica");
+
+        const nomeMusica = document.getElementById("nomeMusica");
+
+        const audio = document.getElementById("audio");
+
+        const video = document.getElementById("video");
+
+
+        musica.addEventListener("change", function () {
+
+            const arquivo = this.files[0];
+
+            if (!arquivo) {
+                return;
+            }
+
+            nomeMusica.textContent = arquivo.name;
+
+            const url = URL.createObjectURL(arquivo);
+
+
+            // MP3
+            if (
+                arquivo.name.toLowerCase().endsWith(".mp3")
+            ) {
+
+                video.pause();
+
+                video.style.display = "none";
+
+                video.removeAttribute("src");
+
+
+                audio.src = url;
+
+                audio.style.display = "block";
+
+                audio.play();
+
+            }
+
+
+            // MP4
+            else if (
+                arquivo.name.toLowerCase().endsWith(".mp4")
+            ) {
+
+                audio.pause();
+
+                audio.style.display = "none";
+
+                audio.removeAttribute("src");
+
+
+                video.src = url;
+
+                video.style.display = "block";
+
+                video.play();
+
+            }
+
+
+            else {
+
+                alert("Selecione um arquivo MP3 ou MP4.");
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
