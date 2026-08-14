@@ -47,10 +47,48 @@
 </head>
 
 <body>
+    <div>
+        <button onclick="TreckSound"> Ir para TreckSound</button>
+        <script>
+         async function enviarMensagem() {
+         const input = document.getElementById('mensagem-input');
+         const historicoDiv = document.getElementById('historico');
+         const texto = input.value.trim();
+    
+    if (!texto) return;
 
-    <div class="caixa">
-        <h1>A AI está Rodando</h1>
+    input.value = ''; // Limpa o campo de digitação
+
+    // 1. Mostra a mensagem do usuário na tela
+    historicoDiv.innerHTML += `<div class="mensagem usuario">${texto}</div>`;
+    historicoDiv.scrollTop = historicoDiv.scrollHeight;
+
+    // 2. Cria o balão de "Digitando..."
+    const idAguardando = 'ia-' + Date.now();
+    historicoDiv.innerHTML += `<div class="mensagem ia" id="${idAguardando}">Digitando...</div>`;
+    historicoDiv.scrollTop = historicoDiv.scrollHeight;
+
+    try {
+        // 3. Chame o seu servidor Node.js
+        const resposta = await fetch('http://localhost:3000/TrecksoundAI', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mensagemUsuario: texto })
+        });
+
+        const dados = await resposta.json();
+
+        // 4. Substitui o carregamento pela resposta da IA
+        document.getElementById(idAguardando).innerText = dados.resposta;
+        historicoDiv.scrollTop = historicoDiv.scrollHeight;
+
+    } catch (erro) {
+        document.getElementById(idAguardando).innerText = "Erro ao conectar com a IA.";
+    }
+}
+
+        </script>
     </div>
-
+    
 </body>
 </html>
