@@ -6,31 +6,41 @@ const port = 3000;
 const cors = require('cors');
 const trecksound = new trecksound({trecksound: process.env.trecksound_API_KEY});
 
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'public')));~
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'AI.html'));
+});
+
+app.post('/trecksound', async (req, res) =>{
+try{
+    const{prompt} = req.body;
+
+    if(!prompt){
+        return res.status(404).json({ erro: 'Nenhum prompt enviado'});
+    }
+
+    const completion = await trecksound.chat.completions.create({
+     model:'gpt-4o-mini',
+     messages:[{role:'user', content: prompt}],
+    });
+
+    res.json({resposta: conpletion.choices[0].mensage.content});
+
+}catch(erro){
+  console.error({error});
+ res.status(500).json({erro: 'Trecksound falou ao processar'});
+}
 });
 
 app.use((req,res) => {
     res.status(404).json({
         erro:"Página não encontrada"
     })
-});
-
-app.post('/trecksound', async (req, res) =>{
-try{
-    const{prompt} = req.body;
-    const completion = await trecksound.chat.completions.create({
-     model:'gpt-40-mini',
-     messages:[{role:'user', content: prompt}],
-    });
-    
-    res.json({resposta: conpletion.choices.mensage.content});
-
-}catch(erro){
- res.status(500).json({erro: 'Trecksound falou ao processar'});
-}
 });
 
 app.listen(port, () =>{

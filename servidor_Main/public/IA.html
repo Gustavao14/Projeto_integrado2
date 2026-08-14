@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://jsdelivr.net"></script>
     <title>TreckSound</title>
 
     <style>
@@ -12,6 +11,7 @@
             min-height: 100vh;
 
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
 
@@ -30,8 +30,11 @@
             border: 2px solid white;
 
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            padding: 20px;
+            box-sizing: border-box;
 
             text-align: center;
             color: white;
@@ -40,55 +43,109 @@
         }
 
         h1 {
-            font-size: 50px;
+            font-size: 40px;
             text-shadow: 0 0 10px white;
+        }
+
+        #historico {
+            flex: 1;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .mensagem {
+            padding: 8px 12px;
+            margin: 6px 0;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .mensagem.usuario {
+            background-color: rgba(255, 255, 255, 0.3);
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .mensagem.ia {
+            background-color: rgba(0, 0, 0, 0.3);
+            margin-right: auto;
+            text-align: left;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        #mensagem-input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background-color: white;
+            cursor: pointer;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
 
-    <div>
-        <button onclick="TreckSound"> Ir para TreckSound</button>
-        <script>
-         async function enviarMensagem() {
-         const input = document.getElementById('mensagem-input');
-         const historicoDiv = document.getElementById('historico');
-         const texto = input.value.trim();
-    
-    if (!texto) return;
-
-    input.value = ''; // Limpa o campo de digitação
-
-    // 1. Mostra a mensagem do usuário na tela
-    historicoDiv.innerHTML += `<div class="mensagem usuario">${texto}</div>`;
-    historicoDiv.scrollTop = historicoDiv.scrollHeight;
-
-    // 2. Cria o balão de "Digitando..."
-    const idAguardando = 'ia-' + Date.now();
-    historicoDiv.innerHTML += `<div class="mensagem ia" id="${idAguardando}">Digitando...</div>`;
-    historicoDiv.scrollTop = historicoDiv.scrollHeight;
-
-    try {
-        // 3. Chame o seu servidor Node.js
-        const resposta = await fetch('http://localhost:3000/TrecksoundAI', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ mensagemUsuario: texto })
-        });
-
-        const dados = await resposta.json();
-
-        // 4. Substitui o carregamento pela resposta da IA
-        document.getElementById(idAguardando).innerText = dados.resposta;
-        historicoDiv.scrollTop = historicoDiv.scrollHeight;
-
-    } catch (erro) {
-        document.getElementById(idAguardando).innerText = "Erro ao conectar com a IA.";
-    }
-}
-
-        </script>
+    <div class="caixa">
+        <h1>TreckSound</h1>
+        <div id="historico"></div>
+        <div class="input-area">
+            <input type="text" id="mensagem-input" placeholder="Digite sua mensagem..." onkeydown="if(event.key==='Enter') enviarMensagem()">
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
     </div>
+
+    <script>
+        async function enviarMensagem() {
+            const input = document.getElementById('mensagem-input');
+            const historicoDiv = document.getElementById('historico');
+            const texto = input.value.trim();
+
+            if (!texto) return;
+
+            input.value = ''; // Limpa o campo de digitação
+
+            // 1. Mostra a mensagem do usuário na tela
+            historicoDiv.innerHTML += `<div class="mensagem usuario">${texto}</div>`;
+            historicoDiv.scrollTop = historicoDiv.scrollHeight;
+
+            // 2. Cria o balão de "Digitando..."
+            const idAguardando = 'ia-' + Date.now();
+            historicoDiv.innerHTML += `<div class="mensagem ia" id="${idAguardando}">Digitando...</div>`;
+            historicoDiv.scrollTop = historicoDiv.scrollHeight;
+
+            try {
+                // 3. Chama o servidor Node.js -- rota e chave do body precisam bater com o backend
+                const resposta = await fetch('http://localhost:3000/trecksound', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: texto })
+                });
+
+                const dados = await resposta.json();
+
+                // 4. Substitui o carregamento pela resposta da IA
+                document.getElementById(idAguardando).innerText = dados.resposta || dados.erro;
+                historicoDiv.scrollTop = historicoDiv.scrollHeight;
+
+            } catch (erro) {
+                document.getElementById(idAguardando).innerText = "Erro ao conectar com a IA.";
+            }
+        }
+    </script>
 </body>
 </html>
