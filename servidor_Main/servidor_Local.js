@@ -1,11 +1,9 @@
 const express = require('express');
 const path = require('path');
-
 const app = express();
-
 const port = 3000;
 
-// Disponibiliza os arquivos da pasta public
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -14,12 +12,12 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/sound-station', (req, res) => {
+app.get('/Soundstation', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'SoundStation.html'));
 });
 
 
-app.get('/IA', (req, res) => {
+app.get('/Trecksound', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'IA.html'));
 });
 
