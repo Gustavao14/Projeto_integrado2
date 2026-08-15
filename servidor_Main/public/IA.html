@@ -17,6 +17,8 @@
 
             background-color: #050b1a;
             font-family: Arial, sans-serif;
+            padding: 20px 0;
+            box-sizing: border-box;
         }
 
         .caixa {
@@ -95,6 +97,27 @@
             cursor: pointer;
             font-weight: bold;
         }
+
+        /* Estilização do Botão Voltar */
+        .voltar {
+            display: inline-block;
+            margin-top: 30px; /* Afasta o botão da caixa para baixo */
+            padding: 10px 20px;
+            background-color: rgba(4, 217, 255, 0.2);
+            color: #04d9ff;
+            border: 2px solid #04d9ff;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(4, 217, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .voltar:hover {
+            background-color: #04d9ff;
+            color: #050b1a;
+            box-shadow: 0 0 20px #04d9ff;
+        }
     </style>
 </head>
 
@@ -108,6 +131,12 @@
             <button onclick="enviarMensagem()">Enviar</button>
         </div>
     </div>
+    
+    <div>
+        <a href="/" class="voltar">
+            ← Voltar para Home
+        </a>
+    </div>
 
     <script>
         async function enviarMensagem() {
@@ -117,19 +146,16 @@
 
             if (!texto) return;
 
-            input.value = ''; // Limpa o campo de digitação
+            input.value = '';
 
-            // 1. Mostra a mensagem do usuário na tela
             historicoDiv.innerHTML += `<div class="mensagem usuario">${texto}</div>`;
             historicoDiv.scrollTop = historicoDiv.scrollHeight;
 
-            // 2. Cria o balão de "Digitando..."
             const idAguardando = 'ia-' + Date.now();
             historicoDiv.innerHTML += `<div class="mensagem ia" id="${idAguardando}">Digitando...</div>`;
             historicoDiv.scrollTop = historicoDiv.scrollHeight;
 
             try {
-                // 3. Chama o servidor Node.js -- rota e chave do body precisam bater com o backend
                 const resposta = await fetch('http://localhost:3000/trecksound', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -138,7 +164,6 @@
 
                 const dados = await resposta.json();
 
-                // 4. Substitui o carregamento pela resposta da IA
                 document.getElementById(idAguardando).innerText = dados.resposta || dados.erro;
                 historicoDiv.scrollTop = historicoDiv.scrollHeight;
 

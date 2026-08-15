@@ -7,7 +7,15 @@ const port = 3000;
 app.use(express.static(path.join(__dirname,'public')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'SoundStation.html'));
+  res.sendFile(path.join(__dirname, 'public', 'Home.html'));
+});
+
+app.get('/Soundstation', (req, res) =>{
+res.sendFile(path.join(__dirname, 'public','SoundStation.html'));
+});
+
+app.get('/Trecksound', (req, res) =>{
+ res.sendFile(path.join(__dirname, 'public', 'AI.html'));
 });
 
 app.use((req,res) => {
