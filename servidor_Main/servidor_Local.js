@@ -108,7 +108,7 @@ app.post('/trecksound', (req, res) => {
     }
     const estado = conversas[idUsuario];
 
-    // ---------- ETAPA 1: frase de início ----------
+    // frase de início 
     if (estado.etapa === "inicio") {
         if (prompt === "quero indicações") {
             estado.etapa = "energia";

@@ -1,14 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "BWWkmDKpsP0=",
+  "dgSpecHash": "2WRCCIVMWiA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Marcos\\Desktop\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj",
+  "projectFilePath": "C:\\Users\\Alunos\\Desktop\\Projeto_integrado2\\Projetointe.cs\\Projetointe.cs.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Marcos\\.nuget\\packages\\csvhelper\\33.1.0\\csvhelper.33.1.0.nupkg.sha512",
-    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.18\\microsoft.netcore.app.ref.9.0.18.nupkg.sha512",
-    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.18\\microsoft.windowsdesktop.app.ref.9.0.18.nupkg.sha512",
-    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.18\\microsoft.aspnetcore.app.ref.9.0.18.nupkg.sha512",
-    "C:\\Users\\Marcos\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\9.0.18\\microsoft.netcore.app.host.win-x64.9.0.18.nupkg.sha512"
+    "C:\\Users\\Alunos\\.nuget\\packages\\csvhelper\\33.1.0\\csvhelper.33.1.0.nupkg.sha512"
   ],
   "logs": []
 }
