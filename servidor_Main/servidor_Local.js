@@ -8,6 +8,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // DATASET 
+// energia: indica em um numero de 1 a 5 o quão a musica é agitada
+// clima: seria o que a musica transmite
+// estilo: preve o estilo que a musica é
 
 const MUSICAS = [
     { id: 1,  nome: "Manha de Vidro",      energia: 1, instrumento: "violao",     clima: "relaxar",   estilo: "acustica" },
@@ -22,22 +25,24 @@ const MUSICAS = [
     { id: 10, nome: "Cafe as Seis",        energia: 3, instrumento: "voz",        clima: "romantico", estilo: "romantica" }
 ];
 
-const K = 3;
+const K = 3; // constante criada para escolher 3 vizinhos proximos
 const INSTRUMENTOS_VALIDOS = ["violao", "piano", "guitarra", "eletronico", "percussao", "voz"];
 const CLIMAS_VALIDOS = ["relaxar", "festa", "romantico", "animado", "triste"];
 
 
 // LÓGICA DO KNN 
 
-function calcularDistancia(energia, instrumento, clima, musica) {
-    const distEnergia = Math.abs(energia - musica.energia) / 4;
-    const distInstrumento = instrumento === musica.instrumento ? 0 : 1;
-    const distClima = clima === musica.clima ? 0 : 1;
-    const soma = distEnergia ** 2 + distInstrumento ** 2 + distClima ** 2;
-    return Math.sqrt(soma);
+function calcularDistancia(energia, instrumento, clima, musica)// função que vai pegar os dados que o usuario digitou para calcular a distancia
+ {
+    const distEnergia = Math.abs(energia - musica.energia) / 4;// energia = resposta do usuario e musica.energia é o valor especifico de energia daquela musica 
+    const distInstrumento = instrumento === musica.instrumento ? 0 : 1; // é uma condicional para verificar se o instrumento é  exatamente igual o da musica, se for igual é 0 se não é 1
+    const distClima = clima === musica.clima ? 0 : 1; // o mesmo da linha anterior
+    const soma = distEnergia ** 2 + distInstrumento ** 2 + distClima ** 2;//ele joga na formula pra calcular a distancia
+    return Math.sqrt(soma); // retorna resultado da distancia
 }
 
-function buscarVizinhos(energia, instrumento, clima) {
+function buscarVizinhos(energia, instrumento, clima)
+ {
     const lista = MUSICAS.map(musica => ({
         distancia: calcularDistancia(energia, instrumento, clima, musica),
         id: musica.id,
@@ -101,7 +106,7 @@ app.get('/Trecksound', (req, res) => {
 
 app.post('/trecksound', (req, res) => {
     const prompt = (req.body.prompt || "").trim();
-    const idUsuario = "usuario1"; // fixo por enquanto (sem login/sessão)
+    const idUsuario = "usuario1"; // usuario fixo
 
     if (!conversas[idUsuario]) {
         conversas[idUsuario] = novaConversa();
