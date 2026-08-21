@@ -35,8 +35,19 @@ const CLIMAS_VALIDOS = ["relaxar", "festa", "romantico", "animado", "triste"];
 function calcularDistancia(energia, instrumento, clima, musica)// função que vai pegar os dados que o usuario digitou para calcular a distancia
  {
     const distEnergia = Math.abs(energia - musica.energia) / 4;// energia = resposta do usuario e musica.energia é o valor especifico de energia daquela musica 
-    const distInstrumento = instrumento === musica.instrumento ? 0 : 1; // é uma condicional para verificar se o instrumento é  exatamente igual o da musica, se for igual é 0 se não é 1
-    const distClima = clima === musica.clima ? 0 : 1; // o mesmo da linha anterior
+    let distInstrumento
+    if(instrumento === musica.instrumento){
+        distInstrumento = 0;
+    } else{
+        distInstrumento = 1;clima === musica.clima
+    }
+
+    let distClima;
+    if(clima === musica.clima){
+       distClima = 0;
+    } else{
+        distClima = 1;
+    } 
     const soma = distEnergia ** 2 + distInstrumento ** 2 + distClima ** 2;//ele joga na formula pra calcular a distancia
     return Math.sqrt(soma); // retorna resultado da distancia
 }
@@ -152,7 +163,7 @@ app.post('/trecksound', (req, res) => {
         });
     }
 
-    // ETAPA 4: clima -> gera a recomendação 
+    // recomendação 
     if (estado.etapa === "clima") {
         const escolha = prompt.toLowerCase();
         if (CLIMAS_VALIDOS.includes(escolha)) {
