@@ -135,7 +135,7 @@ app.post('/trecksound', (req, res) => {
         return res.json({ resposta: "Não entendi. Digite 'quero indicações' para começar." });
     }
 
-    // ---------- ETAPA 2: energia ----------
+    //energia 
     if (estado.etapa === "energia") {
         const numero = Number(prompt);
         if (Number.isInteger(numero) && numero >= 1 && numero <= 5) {
